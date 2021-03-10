@@ -54,10 +54,12 @@ int main() {
 	idx[i] = i;
 	int j = i; 
 	float cnt=1;
+
+    // Iterating upto the leaf node
 	while(a[j] != -1) {
 		cnt *= b[j];
 		j = a[j];
-	}
+	}   
         prob[i] = cnt*(1-c[i]);
     }
 
@@ -66,4 +68,6 @@ int main() {
     for(int i = n-1; i >= 0; i--) {
 	printf("%d ",idx[i]);
     }
+
+    return 0;
 }

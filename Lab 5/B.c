@@ -12,14 +12,15 @@ void Heapify(long long cost[], long long n, long long i) {
 	long long l = 2*i + 1;
 	long long r = 2*i + 2;
 
-	if(l < n && cost[i] < cost[l]) 
+	if(l < n && cost[largest] < cost[l]) 
 		largest = l;
 
-	if(r < n && cost[i] < cost[r])
+	if(r < n && cost[largest] < cost[r])
 		largest = r;
 
 	if(largest != i) {
 		swap(&cost[i],&cost[largest]);
+		Heapify(cost, n, largest);
 	}
 
 	return;
@@ -41,7 +42,7 @@ void Build_Heap(long long cost[], long long n) {
 long long Cost(long long cost[], long long m) {
 	long long ans = cost[0];
 	cost[0] = cost[m-1];
-	Build_Heap(cost,m-1);
+	Heapify(cost, m-1, 0);
 	return ans;
 }
 
@@ -81,4 +82,5 @@ int main() {
 		m--;
 	}
 	printf("%lld",ans);
+	return 0;
 }

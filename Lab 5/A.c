@@ -38,6 +38,8 @@ void Heapify(HeapNode heapNode[], int n, int i) {
 		swap(&heapNode[i].time, &heapNode[smallest].time);
 		swap(&heapNode[i].priority, &heapNode[smallest].priority);
 		swap(&heapNode[i].idx, &heapNode[smallest].idx);
+
+		Heapify(heapNode, n, smallest);
 	}
 
 	return;
@@ -58,7 +60,7 @@ void Build_Heap(HeapNode heapNode[], int n) {
 int AssignTask(HeapNode heapNode[], int k) {
 	int assigned = heapNode[0].idx;
 	heapNode[0] = heapNode[k-1];
-	Build_Heap(heapNode, k-1);
+	Heapify(heapNode, k-1, 0);
 	return assigned;
 }
 
