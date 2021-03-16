@@ -74,6 +74,4 @@ int main() {
 		median = findMedian(a[i], left, right, median);
 		printf("%d ",median);
 	}
-
-
 }
