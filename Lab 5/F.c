@@ -11,7 +11,7 @@ void swap(int* a, int * b) {
 	*b = temp;
 }
 void minHeapify(int heap[], int i) {
-	int parent = i/2;
+	int parent = (i-1)/2;
 
 	if(i >= 0 && heap[parent] > heap[i]) {
 		swap(&heap[parent],&heap[i]);
