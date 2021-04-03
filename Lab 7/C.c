@@ -70,29 +70,41 @@ int main() {
 			}
 		}
 	}
-	int ans = 0;
+	int ans = 0, k = 0;
 	for(int i = 1; i <= n; i++) {
 
 		struct Stack* stack = createStack(m);
 		int mn = enemy[i][1];
 		for(int j = 1; j <= m; j++) {
-			if(enemy[i][j] <= mn) {
-				push(stack, mn);
-				ans = max(ans, j*enemy[i][j]);
-			} else {
-				while(peek(stack) >= enemy[i][j] && !isEmpty(stack)) {
-					mn = min(mn, peek(stack));
+			if(enemy[i][j] == 0) {
+				mn = 1e5;
+				while(!isEmpty(stack))
 					pop(stack);
-				} int len;
-				if(isEmpty(stack))
-					len = 1;
-				else 
-					len = j - peek(stack) + 1;
-				ans = max(ans, len*enemy[i][j]);
+			}
+			else if(enemy[i][j] < mn ) {
+				mn = enemy[i][j];
+				int len = 0;
+				while(!isEmpty(stack))
+					pop(stack), len++;
+				push(stack, mn);
+				ans = max(ans, (len+1)*mn);
+			} else if(enemy[i][j] == mn) {
+				push(stack, mn);
+				ans = max(ans, ((stack->top)+1)*mn);
+			} else { 
+				int len = 0;
+				ans = max(ans, ((stack->top)+2)*mn);
 
 			}
 		}
 	}
+
+	// for(int i = 1; i <= n; i++) {
+	// 	for(int j = 1; j <= m; j++) {
+	// 		printf("%d ",enemy[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
 	printf("%d",ans);
  
 	return 0;
